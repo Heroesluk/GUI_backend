@@ -36,3 +36,15 @@ def entryFactory():
             network=get_network_usage()
         )
     ).to_json()
+
+
+def generate_mock_data():
+    data = [entryFactory() for i in range(50)]
+
+    with open("mock_data.json", "w") as f:
+        f.write("[")
+        f.write(",\n".join(data))
+        f.write("]")
+
+
+generate_mock_data()
