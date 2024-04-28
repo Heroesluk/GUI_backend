@@ -4,14 +4,14 @@ from dataclasses import dataclass, asdict
 
 @dataclass
 class Network:
-    bytes_recieved: int
-    bytes_sent: int
+    kilobytes_recieved: int
+    kilobytes_sent: int
 
 
 @dataclass
 class Disk:
-    read_count: int
-    write_count: int
+    kilobytes_read: int
+    kilobytes_sent: int
 
 
 @dataclass
