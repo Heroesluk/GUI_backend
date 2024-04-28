@@ -39,8 +39,8 @@ async def get_network_delta():
     network_usage_start = get_network_usage()
     await asyncio.sleep(1)
     network_usage_end = get_network_usage()
-    return Network(network_usage_start.kilobytes_sent - network_usage_end.kilobytes_sent,
-                   network_usage_start.kilobytes_recieved - network_usage_end.kilobytes_recieved)
+    return Network(network_usage_end.kilobytes_recieved - network_usage_start.kilobytes_recieved,
+                   network_usage_end.kilobytes_sent - network_usage_start.kilobytes_sent)
 
 
 async def entry_factory():
