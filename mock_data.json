@@ -1,0 +1,1102 @@
+[
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:26.015218",
+        "data": {
+            "cpu": {
+                "usage": 3.9
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13363941
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 70
+            },
+            "network": {
+                "kilobytes_recieved": 1,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:27.064334",
+        "data": {
+            "cpu": {
+                "usage": 2.5
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13362937
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 365
+            },
+            "network": {
+                "kilobytes_recieved": 0,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:28.127080",
+        "data": {
+            "cpu": {
+                "usage": 4.3
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13362020
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 0
+            },
+            "network": {
+                "kilobytes_recieved": 2,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:29.189411",
+        "data": {
+            "cpu": {
+                "usage": 22.1
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13362073
+            },
+            "disk": {
+                "kilobytes_read": 45,
+                "kilobytes_sent": 8
+            },
+            "network": {
+                "kilobytes_recieved": 11,
+                "kilobytes_sent": 1
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:30.250839",
+        "data": {
+            "cpu": {
+                "usage": 8.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13368057
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 0
+            },
+            "network": {
+                "kilobytes_recieved": 1,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:31.310050",
+        "data": {
+            "cpu": {
+                "usage": 7.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13370265
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 4
+            },
+            "network": {
+                "kilobytes_recieved": 3,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:32.365571",
+        "data": {
+            "cpu": {
+                "usage": 14.8
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13369077
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 65
+            },
+            "network": {
+                "kilobytes_recieved": 0,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:33.402819",
+        "data": {
+            "cpu": {
+                "usage": 13.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13379727
+            },
+            "disk": {
+                "kilobytes_read": 8,
+                "kilobytes_sent": 9
+            },
+            "network": {
+                "kilobytes_recieved": 3,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:34.438445",
+        "data": {
+            "cpu": {
+                "usage": 18.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13398089
+            },
+            "disk": {
+                "kilobytes_read": 33,
+                "kilobytes_sent": 0
+            },
+            "network": {
+                "kilobytes_recieved": 1,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:35.513535",
+        "data": {
+            "cpu": {
+                "usage": 63.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13445869
+            },
+            "disk": {
+                "kilobytes_read": 33,
+                "kilobytes_sent": 606
+            },
+            "network": {
+                "kilobytes_recieved": 2,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:36.608887",
+        "data": {
+            "cpu": {
+                "usage": 45.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13523316
+            },
+            "disk": {
+                "kilobytes_read": 65,
+                "kilobytes_sent": 975
+            },
+            "network": {
+                "kilobytes_recieved": 47,
+                "kilobytes_sent": 6
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:37.687900",
+        "data": {
+            "cpu": {
+                "usage": 32.8
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13633576
+            },
+            "disk": {
+                "kilobytes_read": 4,
+                "kilobytes_sent": 586
+            },
+            "network": {
+                "kilobytes_recieved": 19,
+                "kilobytes_sent": 7
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:38.741975",
+        "data": {
+            "cpu": {
+                "usage": 27.9
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13679104
+            },
+            "disk": {
+                "kilobytes_read": 25,
+                "kilobytes_sent": 242
+            },
+            "network": {
+                "kilobytes_recieved": 265,
+                "kilobytes_sent": 38
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:39.804352",
+        "data": {
+            "cpu": {
+                "usage": 36.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13789437
+            },
+            "disk": {
+                "kilobytes_read": 76,
+                "kilobytes_sent": 184
+            },
+            "network": {
+                "kilobytes_recieved": 110,
+                "kilobytes_sent": 4
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:40.853312",
+        "data": {
+            "cpu": {
+                "usage": 32.6
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13854474
+            },
+            "disk": {
+                "kilobytes_read": 203,
+                "kilobytes_sent": 233
+            },
+            "network": {
+                "kilobytes_recieved": 1293,
+                "kilobytes_sent": 34
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:41.900965",
+        "data": {
+            "cpu": {
+                "usage": 51.4
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13837377
+            },
+            "disk": {
+                "kilobytes_read": 239,
+                "kilobytes_sent": 2179
+            },
+            "network": {
+                "kilobytes_recieved": 1221,
+                "kilobytes_sent": 79
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:42.958105",
+        "data": {
+            "cpu": {
+                "usage": 59.2
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14023217
+            },
+            "disk": {
+                "kilobytes_read": 480,
+                "kilobytes_sent": 1045
+            },
+            "network": {
+                "kilobytes_recieved": 2791,
+                "kilobytes_sent": 36
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:44.062411",
+        "data": {
+            "cpu": {
+                "usage": 51.4
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14051745
+            },
+            "disk": {
+                "kilobytes_read": 1087,
+                "kilobytes_sent": 246
+            },
+            "network": {
+                "kilobytes_recieved": 501,
+                "kilobytes_sent": 15
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:45.222313",
+        "data": {
+            "cpu": {
+                "usage": 43.3
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14052761
+            },
+            "disk": {
+                "kilobytes_read": 376,
+                "kilobytes_sent": 770
+            },
+            "network": {
+                "kilobytes_recieved": 2698,
+                "kilobytes_sent": 33
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:46.345987",
+        "data": {
+            "cpu": {
+                "usage": 63.2
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14103465
+            },
+            "disk": {
+                "kilobytes_read": 575,
+                "kilobytes_sent": 1310
+            },
+            "network": {
+                "kilobytes_recieved": 2626,
+                "kilobytes_sent": 27
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:47.666951",
+        "data": {
+            "cpu": {
+                "usage": 99.2
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14087741
+            },
+            "disk": {
+                "kilobytes_read": 1509,
+                "kilobytes_sent": 914
+            },
+            "network": {
+                "kilobytes_recieved": 2252,
+                "kilobytes_sent": 21
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:48.927110",
+        "data": {
+            "cpu": {
+                "usage": 97.2
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14112980
+            },
+            "disk": {
+                "kilobytes_read": 2035,
+                "kilobytes_sent": 823
+            },
+            "network": {
+                "kilobytes_recieved": 2426,
+                "kilobytes_sent": 22
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:50.105220",
+        "data": {
+            "cpu": {
+                "usage": 75.5
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14105255
+            },
+            "disk": {
+                "kilobytes_read": 1105,
+                "kilobytes_sent": 1552
+            },
+            "network": {
+                "kilobytes_recieved": 2312,
+                "kilobytes_sent": 31
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:51.185353",
+        "data": {
+            "cpu": {
+                "usage": 81.8
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14139510
+            },
+            "disk": {
+                "kilobytes_read": 816,
+                "kilobytes_sent": 1074
+            },
+            "network": {
+                "kilobytes_recieved": 3888,
+                "kilobytes_sent": 31
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:52.374605",
+        "data": {
+            "cpu": {
+                "usage": 62.5
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14185889
+            },
+            "disk": {
+                "kilobytes_read": 364,
+                "kilobytes_sent": 688
+            },
+            "network": {
+                "kilobytes_recieved": 3196,
+                "kilobytes_sent": 28
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:53.419646",
+        "data": {
+            "cpu": {
+                "usage": 18.3
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14194597
+            },
+            "disk": {
+                "kilobytes_read": 243,
+                "kilobytes_sent": 0
+            },
+            "network": {
+                "kilobytes_recieved": 1121,
+                "kilobytes_sent": 9
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:54.469676",
+        "data": {
+            "cpu": {
+                "usage": 16.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14200303
+            },
+            "disk": {
+                "kilobytes_read": 4,
+                "kilobytes_sent": 1421
+            },
+            "network": {
+                "kilobytes_recieved": 1057,
+                "kilobytes_sent": 10
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:55.511022",
+        "data": {
+            "cpu": {
+                "usage": 20.6
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14154764
+            },
+            "disk": {
+                "kilobytes_read": 37,
+                "kilobytes_sent": 541
+            },
+            "network": {
+                "kilobytes_recieved": 987,
+                "kilobytes_sent": 13
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:56.553794",
+        "data": {
+            "cpu": {
+                "usage": 15.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14151385
+            },
+            "disk": {
+                "kilobytes_read": 25,
+                "kilobytes_sent": 790
+            },
+            "network": {
+                "kilobytes_recieved": 1118,
+                "kilobytes_sent": 7
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:57.598054",
+        "data": {
+            "cpu": {
+                "usage": 17.6
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14151630
+            },
+            "disk": {
+                "kilobytes_read": 4,
+                "kilobytes_sent": 90
+            },
+            "network": {
+                "kilobytes_recieved": 1384,
+                "kilobytes_sent": 9
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:58.650066",
+        "data": {
+            "cpu": {
+                "usage": 15.4
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14169395
+            },
+            "disk": {
+                "kilobytes_read": 24,
+                "kilobytes_sent": 672
+            },
+            "network": {
+                "kilobytes_recieved": 909,
+                "kilobytes_sent": 6
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:05:59.708030",
+        "data": {
+            "cpu": {
+                "usage": 15.4
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 14116847
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 701
+            },
+            "network": {
+                "kilobytes_recieved": 2,
+                "kilobytes_sent": 1
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:00.765909",
+        "data": {
+            "cpu": {
+                "usage": 26.4
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13119901
+            },
+            "disk": {
+                "kilobytes_read": 248,
+                "kilobytes_sent": 532
+            },
+            "network": {
+                "kilobytes_recieved": 2,
+                "kilobytes_sent": 1
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:01.825980",
+        "data": {
+            "cpu": {
+                "usage": 13.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13114478
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 0
+            },
+            "network": {
+                "kilobytes_recieved": 2224,
+                "kilobytes_sent": 14
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:02.875508",
+        "data": {
+            "cpu": {
+                "usage": 3.3
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13030625
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 271
+            },
+            "network": {
+                "kilobytes_recieved": 0,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:03.924157",
+        "data": {
+            "cpu": {
+                "usage": 6.2
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 12992937
+            },
+            "disk": {
+                "kilobytes_read": 4,
+                "kilobytes_sent": 270
+            },
+            "network": {
+                "kilobytes_recieved": 1,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:04.999583",
+        "data": {
+            "cpu": {
+                "usage": 37.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13084069
+            },
+            "disk": {
+                "kilobytes_read": 39,
+                "kilobytes_sent": 221
+            },
+            "network": {
+                "kilobytes_recieved": 1433,
+                "kilobytes_sent": 7
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:06.098584",
+        "data": {
+            "cpu": {
+                "usage": 57.2
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13095481
+            },
+            "disk": {
+                "kilobytes_read": 101,
+                "kilobytes_sent": 156
+            },
+            "network": {
+                "kilobytes_recieved": 8,
+                "kilobytes_sent": 2
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:07.224393",
+        "data": {
+            "cpu": {
+                "usage": 41.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13080522
+            },
+            "disk": {
+                "kilobytes_read": 16,
+                "kilobytes_sent": 225
+            },
+            "network": {
+                "kilobytes_recieved": 2773,
+                "kilobytes_sent": 16
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:08.367954",
+        "data": {
+            "cpu": {
+                "usage": 80.6
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13140307
+            },
+            "disk": {
+                "kilobytes_read": 70,
+                "kilobytes_sent": 549
+            },
+            "network": {
+                "kilobytes_recieved": 2966,
+                "kilobytes_sent": 21
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:09.502009",
+        "data": {
+            "cpu": {
+                "usage": 53.8
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13126619
+            },
+            "disk": {
+                "kilobytes_read": 3969,
+                "kilobytes_sent": 627
+            },
+            "network": {
+                "kilobytes_recieved": 1485,
+                "kilobytes_sent": 8
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:10.561845",
+        "data": {
+            "cpu": {
+                "usage": 54.9
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13141991
+            },
+            "disk": {
+                "kilobytes_read": 13,
+                "kilobytes_sent": 279
+            },
+            "network": {
+                "kilobytes_recieved": 2596,
+                "kilobytes_sent": 20
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:11.636502",
+        "data": {
+            "cpu": {
+                "usage": 56.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13166571
+            },
+            "disk": {
+                "kilobytes_read": 1200,
+                "kilobytes_sent": 200
+            },
+            "network": {
+                "kilobytes_recieved": 2837,
+                "kilobytes_sent": 24
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:12.715548",
+        "data": {
+            "cpu": {
+                "usage": 32.8
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13127340
+            },
+            "disk": {
+                "kilobytes_read": 30,
+                "kilobytes_sent": 0
+            },
+            "network": {
+                "kilobytes_recieved": 1888,
+                "kilobytes_sent": 13
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:13.798972",
+        "data": {
+            "cpu": {
+                "usage": 33.7
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13133840
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 78
+            },
+            "network": {
+                "kilobytes_recieved": 1230,
+                "kilobytes_sent": 6
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:14.869790",
+        "data": {
+            "cpu": {
+                "usage": 51.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13167022
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 62
+            },
+            "network": {
+                "kilobytes_recieved": 3,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:15.939008",
+        "data": {
+            "cpu": {
+                "usage": 55.3
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13173538
+            },
+            "disk": {
+                "kilobytes_read": 4,
+                "kilobytes_sent": 110
+            },
+            "network": {
+                "kilobytes_recieved": 369,
+                "kilobytes_sent": 3
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:17.031238",
+        "data": {
+            "cpu": {
+                "usage": 32.6
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13174267
+            },
+            "disk": {
+                "kilobytes_read": 4,
+                "kilobytes_sent": 69
+            },
+            "network": {
+                "kilobytes_recieved": 4,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:18.082500",
+        "data": {
+            "cpu": {
+                "usage": 25.0
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13155794
+            },
+            "disk": {
+                "kilobytes_read": 33,
+                "kilobytes_sent": 140
+            },
+            "network": {
+                "kilobytes_recieved": 5,
+                "kilobytes_sent": 0
+            }
+        }
+    },
+    {
+        "pc_name": "LucasComputer",
+        "pc_id": "LucasComputer",
+        "timestamp": "2024-04-28T11:06:19.134843",
+        "data": {
+            "cpu": {
+                "usage": 21.3
+            },
+            "ram": {
+                "total": 16975147,
+                "used": 13172281
+            },
+            "disk": {
+                "kilobytes_read": 0,
+                "kilobytes_sent": 73
+            },
+            "network": {
+                "kilobytes_recieved": 1,
+                "kilobytes_sent": 0
+            }
+        }
+    }
+]
