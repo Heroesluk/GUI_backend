@@ -43,6 +43,8 @@ Those are mvp tables, we can add more tables later on, i.e for raporting.
 ### API Endpoints:
     CPU, RAM, DISK, NETWORK all with filtering based on timestamp, pc_id, user_id. 
     We should be able to fetch data for multiple computers at once.
+    All endpoints should also support grouping timeperiod - meaning giving i.e 
+    average ram usage per 1 hour, etc.
 
     Additionaly: 
     - User registration

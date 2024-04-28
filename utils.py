@@ -94,18 +94,19 @@ def generate_mock_ram():
 
 
 async def generate_mock_disk():
-    data = [{"timestamp": datetime.now().isoformat(), "usage": await get_disk_io_delta()} for i in range(50)]
+    data = [{"timestamp": datetime.now().isoformat(), "usage": (await get_disk_io_delta()).to_dict()} for i in range(50)]
 
     with open("resources/mock_disk.json", "w") as f:
         json.dump(data, f, indent=4)
 
 
 async def generate_mock_network():
-    data = [{"timestamp": datetime.now().isoformat(), "usage": await get_disk_io_delta()} for i in range(50)]
+    data = [{"timestamp": datetime.now().isoformat(), "usage": (await get_network_delta()).to_dict()} for i in
+            range(50)]
 
-    with open("mock_network.json", "w") as f:
+    with open("resources/mock_network.json", "w") as f:
         json.dump(data, f, indent=4)
 
 
 if __name__ == '__main__':
-    asyncio.run(generate_data_recieved_by_server())
+    asyncio.run(generate_mock_network())

@@ -7,11 +7,17 @@ class Network:
     kilobytes_recieved: int
     kilobytes_sent: int
 
+    def to_dict(self):
+        return {"kilobytes_recieved": self.kilobytes_recieved, "kilobytes_sent": self.kilobytes_sent}
+
 
 @dataclass
 class Disk:
     kilobytes_read: int
     kilobytes_sent: int
+
+    def to_dict(self):
+        return {"kilobytes_read": self.kilobytes_read, "kilobytes_sent": self.kilobytes_sent}
 
 
 @dataclass
