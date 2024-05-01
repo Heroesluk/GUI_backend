@@ -1,10 +1,11 @@
 import json
+import subprocess
 from dataclasses import asdict
 from datetime import datetime
 from time import sleep
 import asyncio
 import psutil
-
+import platform
 from Model import PC, Data, CPU, RAM, Disk, Network
 
 # extract to env
@@ -21,7 +22,6 @@ def get_ram_usage():
 
 def get_disk_usage():
     return Disk(psutil.disk_io_counters().read_bytes // 1000, psutil.disk_io_counters().write_bytes // 1000)
-
 
 async def get_disk_io_delta():
     disk_io_start = get_disk_usage()
@@ -94,19 +94,62 @@ def generate_mock_ram():
 
 
 async def generate_mock_disk():
-    data = [{"timestamp": datetime.now().isoformat(), "usage": (await get_disk_io_delta()).to_dict()} for i in range(50)]
+    dt = []
+    for i in range(50):
+        disk = await get_disk_io_delta()
+        data = {
+            "timestamp": datetime.now().isoformat(),
+            "read": disk.kilobytes_read,
+            "sent": disk.kilobytes_sent
+        }
+        dt.append(data)
 
     with open("resources/mock_disk.json", "w") as f:
-        json.dump(data, f, indent=4)
+        json.dump(dt, f, indent=4)
 
 
 async def generate_mock_network():
-    data = [{"timestamp": datetime.now().isoformat(), "usage": (await get_network_delta()).to_dict()} for i in
-            range(50)]
+    dt = []
+    for i in range(50):
+        network = await get_network_delta()
+        data = {
+            "timestamp": datetime.now().isoformat(),
+            "recieved": network.kilobytes_recieved,
+            "sent": network.kilobytes_sent
+        }
+        dt.append(data)
 
     with open("resources/mock_network.json", "w") as f:
-        json.dump(data, f, indent=4)
+        json.dump(dt, f, indent=4)
 
 
-if __name__ == '__main__':
-    asyncio.run(generate_mock_network())
+def get_system_info(os: str):
+    command = {"windows": "wmic cpu get name", "linux": "lscpu"}
+
+    cpu = subprocess.run(['cmd', '/c', command[os]], capture_output=True, text=True).stdout
+    cpu_parsed = cpu.split('\n')[2].rstrip()
+    return {
+        "system": platform.system(),
+        "node": platform.node(),
+        "release": platform.release(),
+        "version": platform.version(),
+        "machine": platform.machine(),
+        "processor": cpu_parsed,
+        "physical_cores": psutil.cpu_count(),
+        "logical_cores": psutil.cpu_count(logical=True),
+        "cpu_freq": psutil.cpu_freq().max,
+        "total_memory": psutil.virtual_memory().total // 1000000,
+        "total_disk_size:": psutil.disk_usage('/').total // 1000000,
+    }
+
+
+def get_mock_system_info():
+    with open("resources/mock_system_info.json", "w") as f:
+        json.dump(get_system_info('windows'), f, indent=4)
+
+
+print(get_system_info('windows'))
+get_mock_system_info()
+
+# if __name__ == '__main__':
+#     generate_mock_ram()
