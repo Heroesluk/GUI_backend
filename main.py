@@ -3,6 +3,8 @@ from sqlalchemy import create_engine, DateTime, Integer, Float, String, MetaData
 from sqlalchemy.orm import Session, declarative_base, sessionmaker, Mapped, mapped_column
 from datetime import datetime as dt
 from uvicorn import run as uvirun
+from pandas import read_sql
+from typing import List
 
 engine = create_engine('sqlite:///:memory:')
 
@@ -43,35 +45,31 @@ session = sessionmaker(bind=engine)
 app = FastAPI()
 
 @app.get("/Stats/CPU")
-async def cpu(pc_id: int, user_id: int, period_start: dt, period_end: dt):
-    stat = select([Stats.c.cpu_usage]).select_from(Stats.outerjoin(Computers.outerjoin(Users, Computers.c.user_id==Users.c.user_id)), Stats.c.pc_id==Computers.c.pc_id) \
-        .where(Stats.c.pc_id in pc_id, Computers.c.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end)
-    with Session(engine) as session:
-        stat = session.execute(stat)
+async def cpu(pc_id: List[int], user_id: List[int], period_start: dt, period_end: dt):
+    stat = session.query(Stats.cpu_usage).outerjoin(Computers, Stats.pc_id==Computers.pc_id).outerjoin(Users, Computers.user_id==Users.user_id) \
+        .filter(Stats.pc_id in pc_id, Computers.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end).statement
+    stat = read_sql(stat, session.bind)     #converts to dataframe
     return stat
 
 @app.get("/Stats/RAM")
-async def ram(pc_id: int, user_id: int, period_start: dt, period_end: dt):
-    stat = select([Stats.c.ram_total, Stats.c.ram_used]).select_from(Stats.outerjoin(Computers.outerjoin(Users, Computers.c.user_id==Users.c.user_id)), Stats.c.pc_id==Computers.c.pc_id) \
-        .where(Stats.c.pc_id in pc_id, Computers.c.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end)
-    with Session(engine) as session:
-        stat = session.execute(stat)
+async def ram(pc_id: List[int], user_id: List[int], period_start: dt, period_end: dt):
+    stat = session.query(Stats.ram_total, Stats.ram_used).outerjoin(Computers, Stats.pc_id==Computers.pc_id).outerjoin(Users, Computers.user_id==Users.user_id) \
+        .filter(Stats.pc_id in pc_id, Computers.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end).statement
+    stat = read_sql(stat, session.bind)     #converts to dataframe
     return stat
 
 @app.get("/Stats/DISK")
-async def disk(pc_id: int, user_id: int, period_start: dt, period_end: dt):
-    stat = select([Stats.c.disk_read, Stats.c.disk_sent]).select_from(Stats.outerjoin(Computers.outerjoin(Users, Computers.c.user_id==Users.c.user_id)), Stats.c.pc_id==Computers.c.pc_id) \
-        .where(Stats.c.pc_id in pc_id, Computers.c.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end)
-    with Session(engine) as session:
-        stat = session.execute(stat)
+async def disk(pc_id: List[int], user_id: List[int], period_start: dt, period_end: dt):
+    stat = session.query(Stats.disk_read, Stats.disk_sent).outerjoin(Computers, Stats.pc_id==Computers.pc_id).outerjoin(Users, Computers.user_id==Users.user_id) \
+        .filter(Stats.pc_id in pc_id, Computers.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end).statement
+    stat = read_sql(stat, session.bind)     #converts to dataframe
     return stat
 
 @app.get("/Stats/NETWORK")
-async def network(pc_id: int, user_id: int, period_start: dt, period_end: dt):
-    stat = select([Stats.c.net_rciv, Stats.c.net_sent]).select_from(Stats.outerjoin(Computers.outerjoin(Users, Computers.c.user_id==Users.c.user_id)), Stats.c.pc_id==Computers.c.pc_id) \
-        .where(Stats.c.pc_id in pc_id, Computers.c.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end)
-    with Session(engine) as session:
-        stat = session.execute(stat)
+async def network(pc_id: List[int], user_id: List[int], period_start: dt, period_end: dt):
+    stat = session.query(Stats.net_rciv, Stats.net_sent).outerjoin(Computers, Stats.pc_id==Computers.pc_id).outerjoin(Users, Computers.user_id==Users.user_id) \
+        .filter(Stats.pc_id in pc_id, Computers.user_id in user_id, Stats.timestamp >= period_start, Stats.timestamp <= period_end).statement
+    stat = read_sql(stat, session.bind)     #converts to dataframe
     return stat
 
 if __name__ == "__main__":
