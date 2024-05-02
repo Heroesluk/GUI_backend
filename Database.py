@@ -101,19 +101,82 @@ def print_stats():
     session.close()
 
 
-def get_from_stats(pc_id: tuple[int] = (), user_id: tuple[int] = -1, period_start: datetime = datetime(1999, 1, 1),
-                   period_end: datetime = datetime.now()):
+def get_cpu_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                       period_end: datetime = datetime.now()):
     session = SessionLocal()
 
-    stat = (select(Users.username, Users.user_id, Computers.pc_id, Computers.pc_name, Stats.timestamp, Stats.cpu_usage,
-                   Stats.ram_total, Stats.ram_used, Stats.disk_read, Stats.disk_sent, Stats.net_rciv, Stats.net_sent)
+    stat = (select(Stats.timestamp, Stats.cpu_usage)
             .join(Computers, Stats.pc_name == Computers.pc_name)
-            .join(Users, Computers.user_id == Users.user_id))
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end)))
 
-    return session.execute(stat).fetchall()
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    data_as_dict = {k.isoformat(): v for k, v in data}
+    return json.dumps(data_as_dict)
+
+
+def get_ram_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                       period_end: datetime = datetime.now()):
+    session = SessionLocal()
+
+    stat = (select(Stats.timestamp, Stats.ram_used, Stats.ram_total)
+            .join(Computers, Stats.pc_name == Computers.pc_name)
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end)))
+
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    data_as_dict = {k.isoformat(): (used, total) for k, used, total in data}
+    return json.dumps(data_as_dict)
+
+
+def get_disk_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                        period_end: datetime = datetime.now()):
+    session = SessionLocal()
+
+    stat = (select(Stats.timestamp, Stats.disk_sent, Stats.disk_read)
+            .join(Computers, Stats.pc_name == Computers.pc_name)
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end)))
+
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    data_as_dict = {k.isoformat(): (sent, read) for k, sent, read in data}
+    return json.dumps(data_as_dict)
+
+
+def get_network_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                           period_end: datetime = datetime.now()):
+    session = SessionLocal()
+
+    stat = (select(Stats.timestamp, Stats.net_sent, Stats.net_rciv)
+            .join(Computers, Stats.pc_name == Computers.pc_name)
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end)))
+
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    data_as_dict = {k.isoformat(): (sent, recieved) for k, sent, recieved in data}
+    return json.dumps(data_as_dict)
 
 
 save_mock_data()
 print_stats()
 
-print(get_from_stats())
+print(get_ram_from_stats(1))
+print(get_cpu_from_stats(1))
+print(get_disk_from_stats(1))
+print(get_network_from_stats(1))
