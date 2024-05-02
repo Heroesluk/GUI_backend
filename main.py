@@ -91,6 +91,11 @@ app = FastAPI()
 session = SessionLocal()
 
 
+
+
+
+
+
 @app.get("/Stats/CPU")
 async def cpu(pc_id: List[int], user_id: List[int], period_start: dt, period_end: dt):
     stat = (session.query(Stats.cpu_usage)
