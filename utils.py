@@ -9,8 +9,6 @@ import platform
 from Model import PC, Data, CPU, RAM, Disk, Network
 
 # extract to env
-user_id = "LucasComputer"
-
 
 async def get_cpu_usage():
     return CPU(psutil.cpu_percent(interval=1))
@@ -43,14 +41,16 @@ async def get_network_delta():
                    network_usage_end.kilobytes_sent - network_usage_start.kilobytes_sent)
 
 
-async def entry_factory():
+async def entry_factory() -> PC:
+    user_id = "LucasComputer"
+
     disk_delta, network_delta, cpu_usage = await asyncio.gather(get_disk_io_delta(), get_network_delta(),
                                                                 get_cpu_usage())
     time = datetime.now().isoformat()
     print(f"entry at {time} created!")
     return PC(
         pc_name=user_id,
-        pc_id=user_id,
+        pc_id="1",
         timestamp=time,
         data=Data(
             cpu=cpu_usage,

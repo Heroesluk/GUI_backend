@@ -1,9 +1,12 @@
+import asyncio
 import json
 from dataclasses import dataclass
 
 from sqlalchemy import create_engine, DateTime, Integer, Float, String, MetaData, ForeignKey, select
 from sqlalchemy.orm import declarative_base, sessionmaker, Mapped, mapped_column
 from datetime import datetime
+
+from utils import entry_factory
 
 engine = create_engine('sqlite:///:memory:')
 
@@ -63,6 +66,9 @@ class Stats(Base):
         self.net_rciv = data['data']['network']['kilobytes_recieved']
         self.net_sent = data['data']['network']['kilobytes_sent']
 
+    def __str__(self):
+        return f"PC Name: {self.pc_name}, Timestamp: {self.timestamp.isoformat()}, CPU Usage: {self.cpu_usage}, RAM Total: {self.ram_total}, RAM Used: {self.ram_used}, Disk Read: {self.disk_read}, Disk Sent: {self.disk_sent}, Network Received: {self.net_rciv}, Network Sent: {self.net_sent}"
+
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -102,21 +108,29 @@ def print_stats():
 
 
 def get_cpu_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
-                       period_end: datetime = datetime.now()):
+                       period_end: datetime = None):
+    if period_end is None:
+        period_end = datetime.now()
+        print("dupa")
+    else:
+        print("no dupa")
+        print(type(period_end))
+
     session = SessionLocal()
+    debug()
+    print(period_end.isoformat())
 
     stat = (select(Stats.timestamp, Stats.cpu_usage)
             .join(Computers, Stats.pc_name == Computers.pc_name)
             .join(Users, Computers.user_id == Users.user_id)
-            .where(user_id == Users.user_id)
+            .where(Users.user_id == user_id)
             .where(Stats.timestamp.between(period_start, period_end)))
 
     if len(pc_id) != 0:
         stat = stat.where(Computers.pc_id.in_(pc_id))
 
     data = session.execute(stat).fetchall()
-    data_as_dict = {k.isoformat(): v for k, v in data}
-    return json.dumps(data_as_dict)
+    return [{"timestamp": k.isoformat(), "usage": v} for k, v in data]
 
 
 def get_ram_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
@@ -133,8 +147,7 @@ def get_ram_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datet
         stat = stat.where(Computers.pc_id.in_(pc_id))
 
     data = session.execute(stat).fetchall()
-    data_as_dict = {k.isoformat(): (used, total) for k, used, total in data}
-    return json.dumps(data_as_dict)
+    return [{"timestamp": k.isoformat(), "total": total, "used": used} for k, used, total in data]
 
 
 def get_disk_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
@@ -151,8 +164,15 @@ def get_disk_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: date
         stat = stat.where(Computers.pc_id.in_(pc_id))
 
     data = session.execute(stat).fetchall()
-    data_as_dict = {k.isoformat(): (sent, read) for k, sent, read in data}
-    return json.dumps(data_as_dict)
+    return [{"timestamp": k.isoformat(), "sent": sent, "read": read} for k, sent, read in data]
+
+
+def debug():
+    session = SessionLocal()
+
+    print([str(i) for i in session.execute(select(Stats)).fetchall()])
+    print(session.execute(select(Computers)).fetchall())
+    print(session.execute(select(Users)).fetchall())
 
 
 def get_network_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
@@ -169,14 +189,20 @@ def get_network_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: d
         stat = stat.where(Computers.pc_id.in_(pc_id))
 
     data = session.execute(stat).fetchall()
-    data_as_dict = {k.isoformat(): (sent, recieved) for k, sent, recieved in data}
-    return json.dumps(data_as_dict)
+    return [{"timestamp": k.isoformat(), "sent": sent, "recieved": recieved} for k, sent, recieved in data]
 
 
-save_mock_data()
-print_stats()
+async def save_entry():
+    with SessionLocal() as session:
+        session.add(Users(username="Lucas", password="123", email="", user_id=1))
+        session.commit()
 
-print(get_ram_from_stats(1))
-print(get_cpu_from_stats(1))
-print(get_disk_from_stats(1))
-print(get_network_from_stats(1))
+    with SessionLocal() as session:
+        session.add(Computers(pc_name="LucasComputer", pc_id=1, user_id=1))
+        session.commit()
+
+    while True:
+        data = json.loads(((await entry_factory()).to_json()))
+        with SessionLocal() as session:
+            session.add(Stats(data))
+            session.commit()
