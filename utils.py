@@ -148,7 +148,6 @@ def get_mock_system_info():
         json.dump(get_system_info('windows'), f, indent=4)
 
 
-print(get_system_info('windows'))
 get_mock_system_info()
 
 # if __name__ == '__main__':

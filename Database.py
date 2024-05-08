@@ -2,7 +2,7 @@ import asyncio
 import json
 from dataclasses import dataclass
 
-from sqlalchemy import create_engine, DateTime, Integer, Float, String, MetaData, ForeignKey, select
+from sqlalchemy import create_engine, DateTime, Integer, Float, String, MetaData, ForeignKey, select, func
 from sqlalchemy.orm import declarative_base, sessionmaker, Mapped, mapped_column
 from datetime import datetime
 
@@ -96,29 +96,20 @@ def save_mock_data():
         session.commit()
 
 
-def print_stats():
-    session = SessionLocal()
-
-    stats = session.query(Stats).all()
-
-    for stat in stats:
-        print(
-            f"PC Name: {stat.pc_name}, Timestamp: {stat.timestamp}, CPU Usage: {stat.cpu_usage}, RAM Total: {stat.ram_total}, RAM Used: {stat.ram_used}, Disk Read: {stat.disk_read}, Disk Sent: {stat.disk_sent}, Network Received: {stat.net_rciv}, Network Sent: {stat.net_sent}")
-    session.close()
+# def print_stats():
+#     session = SessionLocal()
+#
+#     stats = session.query(Stats).all()
+#
+#     for stat in stats:
+#         print(
+#             f"PC Name: {stat.pc_name}, Timestamp: {stat.timestamp}, CPU Usage: {stat.cpu_usage}, RAM Total: {stat.ram_total}, RAM Used: {stat.ram_used}, Disk Read: {stat.disk_read}, Disk Sent: {stat.disk_sent}, Network Received: {stat.net_rciv}, Network Sent: {stat.net_sent}")
+#     session.close()
 
 
 def get_cpu_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
                        period_end: datetime = None):
-    if period_end is None:
-        period_end = datetime.now()
-        print("dupa")
-    else:
-        print("no dupa")
-        print(type(period_end))
-
     session = SessionLocal()
-    debug()
-    print(period_end.isoformat())
 
     stat = (select(Stats.timestamp, Stats.cpu_usage)
             .join(Computers, Stats.pc_name == Computers.pc_name)
@@ -167,6 +158,67 @@ def get_disk_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: date
     return [{"timestamp": k.isoformat(), "sent": sent, "read": read} for k, sent, read in data]
 
 
+def get_total_disk_usage(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                         period_end: datetime = datetime.now()):
+    session = SessionLocal()
+    stat = (((select(func.sum(Stats.disk_sent), func.sum(Stats.disk_read))
+              .join(Computers, Stats.pc_name == Computers.pc_name)
+              .join(Users, Computers.user_id == Users.user_id)
+              .where(Stats.timestamp.between(period_start, period_end)))
+             .where(Users.user_id == user_id))
+            .group_by(Stats.pc_name))
+    data = session.execute(stat).fetchall()
+    return {"total_sent": data[0][0], "total_read": data[0][1], "since": period_start.isoformat()}
+
+
+def get_total_network_usage(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                            period_end: datetime = datetime.now()):
+    session = SessionLocal()
+    stat = (((select(func.sum(Stats.net_sent), func.sum(Stats.net_rciv))
+              .join(Computers, Stats.pc_name == Computers.pc_name)
+              .join(Users, Computers.user_id == Users.user_id)
+              .where(Stats.timestamp.between(period_start, period_end)))
+             .where(Users.user_id == user_id))
+            .group_by(Stats.pc_name))
+    data = session.execute(stat).fetchall()
+    return {"total_sent": data[0][0], "total_received": data[0][1], "since": period_start.isoformat()}
+
+
+def get_average_cpu_load(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                         period_end: datetime = datetime.now()):
+    session = SessionLocal()
+    stat = (((select(func.avg(Stats.cpu_usage))
+              .join(Computers, Stats.pc_name == Computers.pc_name)
+              .join(Users, Computers.user_id == Users.user_id)
+              .where(Stats.timestamp.between(period_start, period_end)))
+             .where(Users.user_id == user_id))
+            .group_by(Stats.pc_name))
+    data = session.execute(stat).fetchall()
+    return {"average_cpu_load": data[0][0], "since": period_start.isoformat()}
+
+
+def get_average_ram_usage(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                          period_end: datetime = datetime.now()):
+    session = SessionLocal()
+
+    ram_query = (((select(Stats.ram_total)
+                   .join(Computers, Stats.pc_name == Computers.pc_name)
+                   .join(Users, Computers.user_id == Users.user_id)
+                   .where(Stats.timestamp.between(period_start, period_end)))
+                  .where(Users.user_id == user_id)))
+    data = session.execute(ram_query).fetchone()
+    print(str(data[0]) + "dupa")
+
+    stat = (((select(func.avg(Stats.ram_used))
+              .join(Computers, Stats.pc_name == Computers.pc_name)
+              .join(Users, Computers.user_id == Users.user_id)
+              .where(Stats.timestamp.between(period_start, period_end)))
+             .where(Users.user_id == user_id))
+            .group_by(Stats.pc_name))
+    data = session.execute(stat).fetchall()
+    return {"average_ram_usage": data[0][0], "since": period_start.isoformat()}
+
+
 def debug():
     session = SessionLocal()
 
@@ -190,6 +242,40 @@ def get_network_from_stats(user_id: int, pc_id: tuple[int] = (), period_start: d
 
     data = session.execute(stat).fetchall()
     return [{"timestamp": k.isoformat(), "sent": sent, "recieved": recieved} for k, sent, recieved in data]
+
+
+def get_stats_snapshot(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                       period_end: datetime = datetime.now()):
+    disk = get_total_disk_usage(user_id, pc_id, period_start, period_end)
+    ram = get_average_ram_usage(user_id, pc_id, period_start, period_end)
+    cpu = get_average_cpu_load(user_id, pc_id, period_start, period_end)
+    network = get_total_network_usage(user_id, pc_id, period_start, period_end)
+    return {"cpu": cpu, "ram": ram, "disk": disk, "network": network}
+
+
+from sqlalchemy import text
+
+
+def get_disk_grouped_by_time(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                             period_end: datetime = datetime.now()):
+    session = SessionLocal()
+
+    stat = (select(func.strftime("%Y-%m-%d-%H:%M", Stats.timestamp).label('minute'), func.sum(Stats.disk_sent),
+                   func.sum(Stats.disk_read))
+            .join(Computers, Stats.pc_name == Computers.pc_name)
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end))
+            .group_by(func.strftime("%Y-%m-%d-%H:%M", Stats.timestamp)))
+
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    return [{"timestamp": k, "sent": sent, "read": read} for k, sent, read in data]
+
+# TODO: create same method for network, average cpu, average ram, and endpoints for it.
+#  replace 'minute' with argument timeperiod which could be 'minute', 'hour', 'day', and like '5minutes' if posssible or something like that
 
 
 async def save_entry():
