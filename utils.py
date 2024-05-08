@@ -143,12 +143,12 @@ def get_system_info(os: str):
     }
 
 
-def get_mock_system_info():
-    with open("resources/mock_system_info.json", "w") as f:
-        json.dump(get_system_info('windows'), f, indent=4)
+#def get_mock_system_info():
+#    with open("resources/mock_system_info.json", "w") as f:
+#        json.dump(get_system_info('windows'), f, indent=4)
 
 
-get_mock_system_info()
+#get_mock_system_info()
 
 # if __name__ == '__main__':
 #     generate_mock_ram()

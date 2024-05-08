@@ -254,19 +254,34 @@ def get_stats_snapshot(user_id: int, pc_id: tuple[int] = (), period_start: datet
 
 
 from sqlalchemy import text
+from enum import Enum
+
+class Timeperiods(Enum):
+    day = "%Y-%m-%d"
+    hour = "%Y-%m-%d-%H"
+    minute = "%Y-%m-%d-%H:%M"
 
 
 def get_disk_grouped_by_time(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
-                             period_end: datetime = datetime.now()):
+                             period_end: datetime = datetime.now(), timeperiod: str = "hour"):
     session = SessionLocal()
 
-    stat = (select(func.strftime("%Y-%m-%d-%H:%M", Stats.timestamp).label('minute'), func.sum(Stats.disk_sent),
-                   func.sum(Stats.disk_read))
-            .join(Computers, Stats.pc_name == Computers.pc_name)
-            .join(Users, Computers.user_id == Users.user_id)
-            .where(user_id == Users.user_id)
-            .where(Stats.timestamp.between(period_start, period_end))
-            .group_by(func.strftime("%Y-%m-%d-%H:%M", Stats.timestamp)))
+    try:
+        timeperiod = Timeperiods[timeperiod].value
+    except:
+        timeperiod = Timeperiods['minute'].value
+
+    stat = (select(func.strftime(timeperiod, Stats.timestamp), func.sum(Stats.disk_sent),
+                    func.sum(Stats.disk_read))
+                .join(Computers, Stats.pc_name == Computers.pc_name)
+                .join(Users, Computers.user_id == Users.user_id)
+                .where(user_id == Users.user_id)
+                .where(Stats.timestamp.between(period_start, period_end)))
+   
+    if timeperiod == "five_min":
+        stat = stat.group_by(func.strftime(timeperiod, Stats.timestamp))
+    else:
+        stat = stat.group_by(func.strftime("%s", Stats.timestamp) // 300) 
 
     if len(pc_id) != 0:
         stat = stat.where(Computers.pc_id.in_(pc_id))
@@ -274,8 +289,85 @@ def get_disk_grouped_by_time(user_id: int, pc_id: tuple[int] = (), period_start:
     data = session.execute(stat).fetchall()
     return [{"timestamp": k, "sent": sent, "read": read} for k, sent, read in data]
 
-# TODO: create same method for network, average cpu, average ram, and endpoints for it.
-#  replace 'minute' with argument timeperiod which could be 'minute', 'hour', 'day', and like '5minutes' if posssible or something like that
+def get_network_grouped_by_time(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                             period_end: datetime = datetime.now(), timeperiod: str = "hour"):
+    session = SessionLocal()
+
+    try:
+        timeperiod = Timeperiods[timeperiod].value
+    except:
+        timeperiod = Timeperiods['hour'].value
+
+    stat = (select(func.strftime(timeperiod, Stats.timestamp), func.sum(Stats.net_sent),
+                   func.sum(Stats.net_rciv))
+            .join(Computers, Stats.pc_name == Computers.pc_name)
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end)))
+   
+    if timeperiod == "five_min":
+        stat = stat.group_by(func.strftime(timeperiod, Stats.timestamp))
+    else:
+        stat = stat.group_by(func.strftime("%s", Stats.timestamp) // 300) 
+
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    return [{"timestamp": k, "sent": sent, "received": rciv} for k, sent, rciv in data]
+
+def get_average_cpu_grouped_by_time(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                             period_end: datetime = datetime.now(), timeperiod: str = "hour"):
+    session = SessionLocal()
+
+    try:
+        timeperiod = Timeperiods[timeperiod].value
+    except:
+        timeperiod = Timeperiods['hour'].value
+
+    stat = (select(func.strftime(timeperiod, Stats.timestamp), func.avg(Stats.cpu_usage))
+            .join(Computers, Stats.pc_name == Computers.pc_name)
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end)))
+   
+    if timeperiod == "five_min":
+        stat = stat.group_by(func.strftime(timeperiod, Stats.timestamp))
+    else:
+        stat = stat.group_by(func.strftime("%s", Stats.timestamp) // 300) 
+
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    return [{"timestamp": k, "avg_usage": avg_use} for k, avg_use in data]
+
+def get_average_ram_grouped_by_time(user_id: int, pc_id: tuple[int] = (), period_start: datetime = datetime(1999, 1, 1),
+                             period_end: datetime = datetime.now(), timeperiod: str = "hour"):
+    session = SessionLocal()
+
+    try:
+        timeperiod = Timeperiods[timeperiod].value
+    except:
+        timeperiod = Timeperiods['hour'].value
+
+    stat = (select(func.strftime(timeperiod, Stats.timestamp), Stats.ram_total, 
+                   func.avg(Stats.ram_used))
+            .join(Computers, Stats.pc_name == Computers.pc_name)
+            .join(Users, Computers.user_id == Users.user_id)
+            .where(user_id == Users.user_id)
+            .where(Stats.timestamp.between(period_start, period_end)))
+   
+    if timeperiod == "five_min":
+        stat = stat.group_by(func.strftime(timeperiod, Stats.timestamp))
+    else:
+        stat = stat.group_by(func.strftime("%s", Stats.timestamp) // 300) 
+
+    if len(pc_id) != 0:
+        stat = stat.where(Computers.pc_id.in_(pc_id))
+
+    data = session.execute(stat).fetchall()
+    return [{"timestamp": k, "total": total, "avg_use": avg_use} for k, total, avg_use in data]
 
 
 async def save_entry():

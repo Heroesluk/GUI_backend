@@ -5,7 +5,8 @@ from fastapi import FastAPI
 from uvicorn import run as uvirun
 
 from Database import get_cpu_from_stats, get_ram_from_stats, get_disk_grouped_by_time, get_network_from_stats, save_entry, \
-    get_total_disk_usage, get_total_network_usage, get_average_cpu_load, get_average_ram_usage, get_stats_snapshot
+    get_total_disk_usage, get_total_network_usage, get_average_cpu_load, get_average_ram_usage, get_stats_snapshot, \
+    get_disk_grouped_by_time, get_network_grouped_by_time, get_average_cpu_grouped_by_time, get_average_ram_grouped_by_time
 
 app = FastAPI()
 
@@ -66,9 +67,24 @@ async def totaldisk(user_id: int, pc_id: tuple[int] = (), period_start: str = dt
 
 
 @app.get("/Stats/DISK-GROUPED")
-async def totaldisk(user_id: int, pc_id: tuple[int] = (), period_start: str = dt(1999, 1, 1).isoformat(),
-                    period_end: str = dt(2030, 1, 1).isoformat()):
-    return get_disk_grouped_by_time(user_id, pc_id, dt.fromisoformat(period_start), dt.fromisoformat(period_end))
+async def diskgrouped(user_id: int, pc_id: tuple[int] = (), period_start: str = dt(1999, 1, 1).isoformat(),
+                    period_end: str = dt(2030, 1, 1).isoformat(), timeperiod: str = "hour"):
+    return get_disk_grouped_by_time(user_id, pc_id, dt.fromisoformat(period_start), dt.fromisoformat(period_end), timeperiod)
+
+@app.get("/Stats/NETWORK-GROUPED")
+async def networkgrouped(user_id: int, pc_id: tuple[int] = (), period_start: str = dt(1999, 1, 1).isoformat(),
+                    period_end: str = dt(2030, 1, 1).isoformat(), timeperiod: str = "hour"):
+    return get_network_grouped_by_time(user_id, pc_id, dt.fromisoformat(period_start), dt.fromisoformat(period_end), timeperiod)
+
+@app.get("/Stats/AVG-CPU-GROUPED")
+async def avgcpugrouped(user_id: int, pc_id: tuple[int] = (), period_start: str = dt(1999, 1, 1).isoformat(),
+                    period_end: str = dt(2030, 1, 1).isoformat(), timeperiod: str = "hour"):
+    return get_average_cpu_grouped_by_time(user_id, pc_id, dt.fromisoformat(period_start), dt.fromisoformat(period_end), timeperiod)
+
+@app.get("/Stats/AVG-RAM-GROUPED")
+async def avgramgrouped(user_id: int, pc_id: tuple[int] = (), period_start: str = dt(1999, 1, 1).isoformat(),
+                    period_end: str = dt(2030, 1, 1).isoformat(), timeperiod: str = "hour"):
+    return get_average_ram_grouped_by_time(user_id, pc_id, dt.fromisoformat(period_start), dt.fromisoformat(period_end), timeperiod)
 
 
 if __name__ == "__main__":
